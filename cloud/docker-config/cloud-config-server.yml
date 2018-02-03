@@ -1,0 +1,47 @@
+version: '3.3'
+services:
+   config-server:
+        image: nexus.elanking.com:5000/cloud/config-server:1.0.0
+        labels:
+            stack: cloud-config
+            service: config-server
+            image: nexus.elanking.com:5000/cloud/config-server:1.0.0
+        environment:
+            - SPRING_PROFILES_ACTIVE=test
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server1:8888/eureka/,http://eureka-server2:8888/eureka/,http://eureka-server3:8888/eureka/
+            - EUREKA_INSTANCE_HOSTNAME=config-server
+            - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=http://git.elanking.com:9080/cloud/config.git
+            - SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCHPATHS=base-config,server-config/**,service-config/**
+            - SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME=sikai.wang
+            - SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD=123456wsk
+        hostname: config-server
+        networks:
+          - cloud-eureka
+          - cloud-config
+          - cloud-service
+          - cloud-apigateway
+        command: ["-Xms512m","-Xmx512m","-Xmn512m","-Xss512k","-XX:+UseConcMarkSweepGC","-XX:CMSInitiatingOccupancyFraction=70","-XX:+UseCMSInitiatingOccupancyOnly","-XX:+UseCMSCompactAtFullCollection","-XX:CMSFullGCsBeforeCompaction=4","-XX:CMSMaxAbortablePrecleanTime=500","-XX:ParallelGCThreads=13","-XX:-UseGCOverheadLimit","-XX:+HeapDumpOnOutOfMemoryError","-XX:HeapDumpPath=/opt/jvm/heapdump.hprof"]
+        deploy:
+            labels:
+                - "traefik.enable=true"
+                - "traefik.frontend.priority=99"
+                - "traefik.frontend.passHostHeader=true"
+                - "traefik.frontend.rule=Host:config.service.test.yoomath.com"
+                - "traefik.port=8888"
+                - "traefik.docker.network=cloud-config"
+            replicas: 3
+            endpoint_mode: dnsrr
+            update_config:
+                parallelism: 1
+                delay: 10s
+            restart_policy:
+                condition: any
+networks:
+    cloud-eureka:
+        external: true
+    cloud-config:
+        external: true
+    cloud-service:
+        external: true
+    cloud-apigateway:
+        external: true

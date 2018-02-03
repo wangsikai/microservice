@@ -1,0 +1,38 @@
+version: '3.3'
+services:
+   intelligentCorrection-service:
+        image: nexus.elanking.com:5000/cloud/intelligentcorrection-service:1.0.0
+        labels:
+            stack: cloud-service
+            service: intelligentCorrection-service
+            image: nexus.elanking.com:5000/cloud/intelligentcorrection-service:1.0.0
+        environment:
+            - TZ=Asia/Shanghai
+            - SPRING_PROFILES_ACTIVE=test
+            - EUREKA_INSTANCE_HOSTNAME=intelligentCorrection-service
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server1:8888/eureka/,http://eureka-server2:8888/eureka/,http://eureka-server3:8888/eureka/
+            - SPRING_CLOUD_CONFIG_DISCOVERY_SERVICEID=config-server
+        hostname: intelligentCorrection-service
+        networks:
+          - cloud-eureka
+          - cloud-config
+          - cloud-service
+          - cloud-apigateway
+        command: ["-Xms512m","-Xmx512m","-Xmn512m","-Xss512k","-XX:+UseConcMarkSweepGC","-XX:CMSInitiatingOccupancyFraction=70","-XX:+UseCMSInitiatingOccupancyOnly","-XX:+UseCMSCompactAtFullCollection","-XX:CMSFullGCsBeforeCompaction=4","-XX:CMSMaxAbortablePrecleanTime=500","-XX:ParallelGCThreads=13","-XX:-UseGCOverheadLimit","-XX:+HeapDumpOnOutOfMemoryError","-XX:HeapDumpPath=/opt/jvm/heapdump.hprof"]
+        deploy:
+            replicas: 2
+#            endpoint_mode: dnsrr
+            update_config:
+                parallelism: 1
+                delay: 10s
+            restart_policy:
+                condition: any
+networks:
+    cloud-eureka:
+        external: true
+    cloud-config:
+        external: true
+    cloud-service:
+        external: true
+    cloud-apigateway:
+        external: true

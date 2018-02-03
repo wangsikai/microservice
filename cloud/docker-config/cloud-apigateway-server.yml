@@ -1,0 +1,46 @@
+version: '3.3'
+services:
+   apigateway-server:
+        image: nexus.elanking.com:5000/cloud/apigateway-server:1.0.0
+        labels:
+            stack: cloud-apigateway
+            service: apigateway-server
+            image: nexus.elanking.com:5000/cloud/apigateway-server:1.0.0
+        environment:
+            - TZ=Asia/Shanghai
+            - SPRING_PROFILES_ACTIVE=test
+            - EUREKA_INSTANCE_HOSTNAME=apigateway-server
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server1:8888/eureka/,http://eureka-server2:8888/eureka/,http://eureka-server3:8888/eureka/
+            - SPRING_CLOUD_CONFIG_DISCOVERY_SERVICEID=config-server
+        hostname: apigateway-server
+        networks:
+          - cloud-eureka
+          - cloud-config
+          - cloud-apigateway
+          - cloud-service
+        command: ["-Xms512m","-Xmx512m","-Xmn512m","-Xss512k","-XX:+UseConcMarkSweepGC","-XX:CMSInitiatingOccupancyFraction=70","-XX:+UseCMSInitiatingOccupancyOnly","-XX:+UseCMSCompactAtFullCollection","-XX:CMSFullGCsBeforeCompaction=4","-XX:CMSMaxAbortablePrecleanTime=500","-XX:ParallelGCThreads=13","-XX:-UseGCOverheadLimit","-XX:+HeapDumpOnOutOfMemoryError","-XX:HeapDumpPath=/opt/jvm/heapdump.hprof"]
+        deploy:
+            labels:
+                - "traefik.enable=true"
+                - "traefik.frontend.priority=98"
+                - "traefik.frontend.passHostHeader=true"
+                - "traefik.frontend.rule=Host:api.test.yoomath.com"
+                - "traefik.port=8888"
+                - "traefik.docker.network=cloud-apigateway"
+                - "traefik.backend.loadbalancer.swarm=true"
+            replicas: 3
+            update_config:
+                parallelism: 1
+                delay: 10s
+            restart_policy:
+                condition: any
+
+networks:
+    cloud-eureka:
+        external: true
+    cloud-config:
+        external: true
+    cloud-service:
+        external: true
+    cloud-apigateway:
+        external: true
