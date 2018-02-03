@@ -1,0 +1,13 @@
+zuul:
+  add-host-header: false
+  add-proxy-headers: true
+  ignore-local-service: true
+  ignore-security-headers: true
+  host:
+    max-per-route-connections: 20
+    host.max-total-connections: 200
+  ignoredServices: '*'
+  routes:
+    handwriting-proxy:
+      path: /api/hwproxy/1/**
+      serviceId: handwriting-proxy-service    
