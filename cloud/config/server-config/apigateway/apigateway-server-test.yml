@@ -1,0 +1,5 @@
+zuul:
+  routes:
+    handwriting-proxy:
+      path: /api/hwproxy/1/**
+      serviceId: handwriting-proxy-service  

@@ -1,0 +1,7 @@
+stages:
+  - deploy
+job1:
+  stage: deploy
+  script: "mvn clean deploy -U -Dmaven.test.skip=true"
+  tags:
+    - mvn
