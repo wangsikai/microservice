@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+   	<springProfile name="NONE">
+	    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %boldYellow([%thread]) [%X{TOKEN}] %highlight(%-5level) %boldGreen(%logger{36}) - %msg%n</pattern>
+			</encoder>
+		</appender>
+	</springProfile>
+
+   	<springProfile name="local-dev,dev,local-test,test,preview,prod">		
+		<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{TOKEN}] %-5level %logger{36} - %msg%n</pattern>
+			</encoder>
+		</appender>
+	</springProfile>
+	
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+		<file>./logs/handwriting-proxy.error.log</file>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">  
+            <level>ERROR</level>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>  
+        </filter>  
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+            <fileNamePattern>./logs/handwriting-proxy.error.log.%d{yyyy-MM-dd}</fileNamePattern>  
+            <maxHistory>30</maxHistory>  
+        </rollingPolicy>  
+        <encoder>  
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>  
+        </encoder>  
+    </appender>
+	
+	<!-- org.hibernate -->
+	<springProfile name="local-dev,dev,local-test,test">
+		<logger name="org.hibernate.type" level="OFF" />
+		<logger name="org.hibernate.SQL" level="OFF" />
+	</springProfile>
+	
+	<!-- jdbc -->
+	<springProfile name="local-dev,dev,local-test,test">
+		<logger name="jdbc.connection" level="OFF" />
+		<logger name="jdbc.audit" level="OFF" />
+		<logger name="jdbc.resultset" level="OFF" />
+		<logger name="jdbc.sqlonly" level="OFF" />
+		<logger name="jdbc.sqltiming" level="OFF" />
+	</springProfile>
+	
+	<!-- org.springframework -->
+	<logger name="org.springframework" level="INFO" />
+	
+	<!-- com.lanking -->
+	<logger name="com.lanking" level="INFO" />
+	
+	<root level="ERROR">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ERROR" />
+	</root>
+</configuration>
