@@ -1,0 +1,41 @@
+yoo-cloud:
+  database:
+    snowflake:
+      zkServerList: zookeeper:2181
+ms:
+  auth:
+    datasource:
+      biz:
+        type: ${yoo-cloud.datasource.type}
+        name: biz
+        url: ${ms.auth.datasource.biz.url_prefix}://${ms.auth.datasource.biz.server_port}/${ms.auth.datasource.biz.db}?useUnicode=true&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&useSSL=false
+        driverClassName: net.sf.log4jdbc.DriverSpy
+        url_prefix: jdbc:log4jdbc:mysql
+        server_port: mysql:3306
+        db: uxb
+        username: uxb
+        password: uxb123
+        initialSize: 10
+        minIdle: 10
+        maxActive: 100
+        maxWait: 10000
+        timeBetweenEvictionRunsMillis: ${yoo-cloud.datasource.timeBetweenEvictionRunsMillis}
+        minEvictableIdleTimeMillis: ${yoo-cloud.datasource.minEvictableIdleTimeMillis}
+        validationInterval: ${yoo-cloud.datasource.validationInterval}
+        validationQuery: ${yoo-cloud.datasource.validationQuery}
+        removeAbandoned: ${yoo-cloud.datasource.removeAbandoned}
+        removeAbandonedTimeout: ${yoo-cloud.datasource.removeAbandonedTimeout}
+        logAbandoned: ${yoo-cloud.datasource.logAbandoned}
+        testWhileIdle: ${yoo-cloud.datasource.testWhileIdle}
+        testOnBorrow: ${yoo-cloud.datasource.testOnBorrow}
+        testOnReturn: ${yoo-cloud.datasource.testOnReturn}
+        jdbcInterceptors: ${yoo-cloud.datasource.jdbcInterceptors}
+        defaultAutoCommit: ${yoo-cloud.datasource.defaultAutoCommit}
+        jmxEnabled: ${yoo-cloud.datasource.jmxEnabled}
+    hibernate:
+      biz:
+        dialect: ${yoo-cloud.hibernate.dialect}
+        showSql: ${yoo-cloud.hibernate.showSql}
+        formatSql: ${yoo-cloud.hibernate.formatSql}
+        hbm2ddlAuto: ${yoo-cloud.hibernate.hbm2ddlAuto}
+        entitymanagerPackagesToScan: com.lanking.yc.domain
