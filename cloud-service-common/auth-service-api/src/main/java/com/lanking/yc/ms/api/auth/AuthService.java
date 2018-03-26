@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 public interface AuthService {
 
+	/**
+	 * 获取token
+	 */
 	@RequestMapping(value = "token")
 	void token();
 
-	@RequestMapping(value = "refresh_token")
-	void refreshToken();
-
-	@RequestMapping(value = "")
+	@RequestMapping(value = "logout")
 	void logout();
 }

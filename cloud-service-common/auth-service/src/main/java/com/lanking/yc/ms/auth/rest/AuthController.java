@@ -14,11 +14,6 @@ public class AuthController implements AuthService {
 	}
 
 	@Override
-	public void refreshToken() {
-
-	}
-
-	@Override
 	public void logout() {
 
 	}
