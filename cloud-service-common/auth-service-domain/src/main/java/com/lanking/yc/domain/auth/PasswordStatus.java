@@ -5,10 +5,6 @@ import com.lanking.cloud.sdk.bean.Valueable;
 /**
  * 密码状态
  * 
- * <pre>
- * 从原来平台的domain-yoo项目中复制而来   by Michael
- * </pre>
- * 
  * @since 3.9.7
  * @author <a href="mailto:sikai.wang@elanking.com">sikai.wang</a>
  * @version 2017年4月26日
