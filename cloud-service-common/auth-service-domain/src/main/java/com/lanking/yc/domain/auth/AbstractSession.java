@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.usertype.UserType;
 
 import com.lanking.cloud.component.db.support.hibernate.identifierGenerator.SnowflakeGenerator;
 

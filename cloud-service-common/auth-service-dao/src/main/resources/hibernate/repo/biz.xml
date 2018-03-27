@@ -6,8 +6,7 @@
        ">
 	<bean
 		class="com.lanking.cloud.component.db.support.hibernate.HibernateRepoFactoryBean">
-		<property name="entityClass"
-			value="com.lanking.yc.domain.auth.Account" />
+		<property name="entityClass" value="com.lanking.yc.domain.auth.Account" />
 		<property name="repoFactory" ref="repoFactory" />
 		<qualifier value="AccountRepo" />
 	</bean>

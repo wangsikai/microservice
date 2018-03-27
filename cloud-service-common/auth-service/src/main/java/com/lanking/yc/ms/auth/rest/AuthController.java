@@ -14,14 +14,11 @@ public class AuthController implements AuthService {
 
 	@Override
 	public String login(HttpServletRequest request, HttpServletResponse response, String username, String password) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
