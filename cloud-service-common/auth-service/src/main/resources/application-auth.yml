@@ -1,0 +1,6 @@
+#jwt config
+ms:
+  auth:
+    jwt:
+      secret: qnR8UCqJggD55PohusaBNviGoOJ67HC6Btry4qXLVZc
+      subject:
