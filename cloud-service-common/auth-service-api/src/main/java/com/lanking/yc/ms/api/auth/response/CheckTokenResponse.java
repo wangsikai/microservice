@@ -1,6 +1,6 @@
 package com.lanking.yc.ms.api.auth.response;
 
-import com.auth0.jwt.JWT;
+import com.lanking.yc.ms.api.auth.vo.JWT;
 import com.lanking.yc.ms.api.vo.AbstractResponse;
 
 import lombok.Getter;

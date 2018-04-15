@@ -57,7 +57,7 @@ public interface AuthService {
 	 * @return {@link CheckTokenResponse}
 	 */
 	@RequestMapping(value = "/checkToken", method = { RequestMethod.POST })
-	CheckTokenResponse checkToken(HttpServletRequest request, HttpServletResponse response, String token,
+	CheckTokenResponse verifyToken(HttpServletRequest request, HttpServletResponse response, String token,
 			@RequestParam(defaultValue = "false", required = false) boolean initSession);
 
 	/**

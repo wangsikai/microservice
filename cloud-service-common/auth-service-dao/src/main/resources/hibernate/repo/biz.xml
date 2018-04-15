@@ -10,5 +10,18 @@
 		<property name="repoFactory" ref="repoFactory" />
 		<qualifier value="AccountRepo" />
 	</bean>
-
+	
+	<bean
+		class="com.lanking.cloud.component.db.support.hibernate.HibernateRepoFactoryBean">
+		<property name="entityClass" value="com.lanking.yc.domain.auth.User" />
+		<property name="repoFactory" ref="repoFactory" />
+		<qualifier value="UserRepo" />
+	</bean>
+	
+	<bean
+		class="com.lanking.cloud.component.db.support.hibernate.HibernateRepoFactoryBean">
+		<property name="entityClass" value="com.lanking.yc.domain.auth.Session" />
+		<property name="repoFactory" ref="repoFactory" />
+		<qualifier value="SessionRepo" />
+	</bean>
 </beans>

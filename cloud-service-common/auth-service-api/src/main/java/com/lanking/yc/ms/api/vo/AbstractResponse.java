@@ -1,7 +1,5 @@
 package com.lanking.yc.ms.api.vo;
 
-import com.lanking.cloud.ex.code.StatusCode;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +9,13 @@ public abstract class AbstractResponse implements Response {
 
 	private static final long serialVersionUID = -5493172070206822148L;
 
-	public int ret_code = StatusCode.SUCCEED;
+	public static int SUCCESS_CODE = 0;
+	public static int FAIL_CODE = -1;
 
-	public String ret_msg = "OK";
+	public static String SUCCESS_MESSAGE = "OK";
+	public static String FAIL_MESSAGE = "fail";
+
+	public int ret_code = SUCCESS_CODE;
+	public String ret_msg = SUCCESS_MESSAGE;
+
 }

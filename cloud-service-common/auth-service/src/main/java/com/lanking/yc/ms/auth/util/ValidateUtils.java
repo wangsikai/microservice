@@ -3,8 +3,6 @@ package com.lanking.yc.ms.auth.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.security.auth.login.AccountException;
-
 import com.lanking.cloud.sdk.util.StringUtils;
 
 /**
@@ -18,7 +16,7 @@ import com.lanking.cloud.sdk.util.StringUtils;
  */
 public class ValidateUtils {
 
-	public static boolean isName(String value) throws AccountException {
+	public static boolean isName(String value) {
 		boolean validate = true;
 		validate = StringUtils.isNotBlank(value);
 		if (validate) {
@@ -47,7 +45,7 @@ public class ValidateUtils {
 		return validate;
 	}
 
-	public static boolean validateEmail(String value) throws AccountException {
+	public static boolean isEmail(String value) {
 		boolean validate = true;
 		validate = StringUtils.isNotBlank(value);
 		if (validate) {
@@ -59,7 +57,7 @@ public class ValidateUtils {
 		return validate;
 	}
 
-	public static boolean validateMobile(String value) throws AccountException {
+	public static boolean isMobile(String value) {
 		boolean validate = true;
 		validate = StringUtils.isNotBlank(value);
 		if (validate) {
@@ -70,28 +68,4 @@ public class ValidateUtils {
 		return validate;
 	}
 
-	public static boolean validatePassword(String value) throws AccountException {
-		boolean validate = true;
-		validate = StringUtils.isNotBlank(value);
-		if (validate) {
-			Pattern p = Pattern.compile("[^\\s\u4e00-\u9fa5]{6,16}");
-			Matcher m = p.matcher(value);
-			validate = m.matches();
-		}
-		if (validate) {
-			char[] pc = value.toCharArray();
-			boolean repeat = true;
-			String p = String.valueOf(pc[0]);
-			for (int i = 1; i < pc.length; i++) {
-				if (!p.equals(String.valueOf(pc[i]))) {
-					repeat = false;
-					break;
-				}
-			}
-			if (repeat) {
-				validate = false;
-			}
-		}
-		return validate;
-	}
 }
