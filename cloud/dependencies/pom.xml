@@ -25,6 +25,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency> -->
+			<dependency>
+			    <groupId>com.auth0</groupId>
+			    <artifactId>java-jwt</artifactId>
+			    <version>${java-jwt.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<modules></modules>
@@ -33,6 +38,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		
+		<java-jwt.version>3.3.0</java-jwt.version>
 	</properties>
 	
 	<!-- Build Settings -->
