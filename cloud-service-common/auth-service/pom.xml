@@ -74,7 +74,6 @@
 	    	<dependency>
 			<groupId>com.lanking.cloud.component</groupId>
 			<artifactId>database</artifactId>
-			<version>1.0.6-SNAPSHOT</version>
 		</dependency>	
 	    	<dependency>
 	    		<groupId>com.lanking.yc.ms</groupId>

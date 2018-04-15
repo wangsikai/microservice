@@ -44,7 +44,7 @@ public interface AuthService {
 	LogoutResponse logout(HttpServletRequest request, HttpServletResponse response, String token);
 
 	/**
-	 * check token,可以返回token对应的session信息，由initSession参数控制
+	 * verify token,可以返回token对应的session信息，由initSession参数控制
 	 * 
 	 * @param request
 	 *            请求对象 {@link HttpServletRequest}
@@ -56,7 +56,7 @@ public interface AuthService {
 	 *            是否返回对应session信息对象
 	 * @return {@link CheckTokenResponse}
 	 */
-	@RequestMapping(value = "/checkToken", method = { RequestMethod.POST })
+	@RequestMapping(value = "/verifyToken", method = { RequestMethod.POST })
 	CheckTokenResponse verifyToken(HttpServletRequest request, HttpServletResponse response, String token,
 			@RequestParam(defaultValue = "false", required = false) boolean initSession);
 
