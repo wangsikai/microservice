@@ -3,4 +3,7 @@ ms:
   auth:
     jwt:
       secret: qnR8UCqJggD55PohusaBNviGoOJ67HC6Btry4qXLVZc
-      subject:
+      subject: auth-service
+      issuer: auth-service
+      inactiveInterval: 8640000000
+      expires: 8640000000

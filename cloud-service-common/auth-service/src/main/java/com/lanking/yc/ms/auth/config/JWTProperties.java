@@ -12,4 +12,18 @@ import lombok.Setter;
 @Configuration
 public class JWTProperties {
 	private String secret;
+
+	private String issuer;
+
+	private String subject;
+
+	/**
+	 * token支持的最大发呆时间(ms)
+	 */
+	private long inactiveInterval;
+	/**
+	 * token支持的有效时间(ms)
+	 */
+	private long expires;
+
 }

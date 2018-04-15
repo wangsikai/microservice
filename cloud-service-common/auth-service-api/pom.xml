@@ -52,6 +52,9 @@
 			<scope>provided</scope>
 		</dependency>
     		<!-- 依赖的其他模块 -->
-    		
+    		<dependency>
+			<groupId>com.lanking.cloud.common</groupId>
+        		<artifactId>ex</artifactId>
+        	</dependency>
     </dependencies>
 </project>
